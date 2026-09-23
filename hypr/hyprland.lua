@@ -1,38 +1,117 @@
--- HyprFlux — https://github.com/ahmad9059/HyprFlux
--- Lua entrypoint (Hyprland >= 0.55). Replaces hyprland.conf.
---
--- Wiki: https://wiki.hypr.land/Configuring/Start/
--- Validation: Hyprland --config ~/.config/hypr/hyprland.lua --verify-config
--- Rollback: the legacy hyprlang config was archived in hypr_old/ (removed 2026-08-26).
--- Lua is now the only config format for Hyprland >= 0.55.
 
-local Home = os.getenv("HOME")
+---------------------
+---- MY PROGRAMS ----
+---------------------
 
--- User defaults (term/files/edit/search_engine) + color palette module
-local defaults = require("UserConfigs.user-defaults")
-local colors = require("hyprflux-colors")
+-- Set programs that you use
+local terminal    = "kitty"
+local fileManager = "dolphin"
+local menu = "rofi"
 
--- Settings, environment, decorations, animations
--- NOTE: hl.env calls MUST stay before any other hl.* use.
-require("UserConfigs.env-variables")
-require("UserConfigs.user-settings")
-require("UserConfigs.user-decorations")
-require("UserConfigs.user-animations")
 
--- Keybinds
-require("configs.keybinds")
-require("UserConfigs.user-keybinds")
-require("UserConfigs.laptops")
+-------------------
+---- AUTOSTART ----
+-------------------
 
--- Window/layer/workspace rules
-require("UserConfigs.window-rules")
-require("UserConfigs.workspace-rules") -- guide only; edit workspaces.lua (nwg-displays)
+-- See https://wiki.hypr.land/Configuring/Basics/Autostart/
 
--- Autostart, monitors, workspaces
-hl.on("hyprland.start", function()
-    hl.exec_cmd(Home .. "/.config/hypr/initial-boot.sh")
-end)
-require("UserConfigs.startup-apps")
-require("monitors")               -- nwg-displays generated
-require("workspaces")             -- nwg-displays generated
-require("UserConfigs.LaptopDisplay") -- lid-close monitor behaviour
+require("conf.autostart")
+--require("conf.visuals")
+require("conf.binds")
+require("conf.deco")
+require("conf.anim")
+require("conf.rules")
+require("conf.input")
+require("conf.monitor")
+
+
+-------------------------------
+---- ENVIRONMENT VARIABLES ----
+-------------------------------
+
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
+
+hl.env("XCURSOR_SIZE", "24")
+hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("GBM_BACKEND", "nvidia-drm")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+hl.env("NVD_BACKEND", "direct")
+
+-----------------------
+----- PERMISSIONS -----
+-----------------------
+
+-- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Permissions/
+-- Please note permission changes here require a Hyprland restart and are not applied on-the-fly
+-- for security reasons
+
+-- hl.config({
+--   ecosystem = {
+--     enforce_permissions = true,
+--   },
+-- })
+
+-- hl.permission("/usr/(bin|local/bin)/grim", "screencopy", "allow")
+-- hl.permission("/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland", "screencopy", "allow")
+-- hl.permission("/usr/(bin|local/bin)/hyprpm", "plugin", "allow")
+
+
+
+
+-- Ref https://wiki.hypr.land/Configuring/Basics/Workspace-Rules/
+-- "Smart gaps" / "No gaps when only"
+-- uncomment all if you wish to use that.
+-- hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+-- hl.workspace_rule({ workspace = "f[1]",   gaps_out = 0, gaps_in = 0 })
+-- hl.window_rule({
+--     name  = "no-gaps-wtv1",
+--     match = { float = false, workspace = "w[tv1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+-- hl.window_rule({
+--     name  = "no-gaps-f1",
+--     match = { float = false, workspace = "f[1]" },
+--     border_size = 0,
+--     rounding    = 0,
+-- })
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
+hl.config({
+    dwindle = {
+        preserve_split = true, -- You probably want this
+    },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Master-Layout/ for more
+hl.config({
+    master = {
+        new_status = "master",
+    },
+})
+
+-- See https://wiki.hypr.land/Configuring/Layouts/Scrolling-Layout/ for more
+hl.config({
+    scrolling = {
+        fullscreen_on_one_column = true,
+    },
+})
+
+----------------
+----  MISC  ----
+----------------
+
+hl.config({
+    misc = {
+        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        disable_hyprland_logo   = true, -- If true disables the random hyprland logo / anime girl background. :(
+    },
+})
+
+hl.config({
+	cursor = {
+		no_hardware_cursors = 1,
+	},
+})
+
+

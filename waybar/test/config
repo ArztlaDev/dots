@@ -6,9 +6,9 @@
         "margin-top": 5,
         "margin-right": 10,
         "margin-left": 10,
-        "modules-left": ["custom/launcher","custom/notification","hyprland/workspaces"],
+        "modules-left": ["custom/launcher","custom/notification","hyprland/workspaces","network"],
         "modules-center": ["hyprland/window"],
-        "modules-right": ["mpris","pulseaudio","tray","battery","network", "clock","custom/power"],
+        "modules-right": ["mpris","pulseaudio","tray","battery","backlight", "clock","custom/power"],
         "reload_style_on_change": true,
         "battery": {
             "format": "{capacity}% {icon}",
@@ -60,7 +60,7 @@
             "orientation": "horizontal"
         },
         "network": {
-            "interface": "eno1",
+            "interface": "wlo1",
             "interval": 1,
             "format": " {bandwidthUpBits}  {bandwidthDownBits}",
             //"format": "{ifname}",
@@ -94,7 +94,7 @@
             "spacing": 16,
         },
         "custom/launcher": {
-            "on-click": "rofi -show drun",
+            "on-click": "rofi -show window",
             "format": "󰣇",
             "tooltip": false
         },

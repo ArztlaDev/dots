@@ -35,7 +35,19 @@ tooltip label {
 #backlight,
 #backlight-slider,
 #network,
-#tray,
+#tray{
+	color: #f4b8e4;
+}
+#tray:hover {
+	background-color: #f4b8e4;
+	color: #121212;
+}
+#tray > .passive,
+#tray > .active,
+#tray > .needs-attention{
+	background-color: transparent;
+	padding: 0 2px;
+}
 #custom-power,
 #custom-notification,
 #custom-clipboard,

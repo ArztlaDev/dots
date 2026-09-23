@@ -1,0 +1,6 @@
+hl.on("hyprland.start", function()
+	hl.exec_cmd("waybar")
+	hl.exec_cmd("awww-daemon")
+	hl.exec("sleep 0.3 && awww img /home/$USER/wallpaper/test.jpg --transition-type random")
+	hl.exec_cmd("swaync")
+end)
