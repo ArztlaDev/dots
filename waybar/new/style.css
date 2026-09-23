@@ -1,0 +1,227 @@
+* {
+  min-height: 0;
+  min-width: 0;
+  font-family: "JetBrainsMono NFP";
+  font-size: 12px;
+  font-weight: 600;
+  /* Adding padding/margin here compounds the effect across every widget - keep it empty. */
+}
+
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  background-color: rgba(29, 30, 41, 0.5);
+}
+
+/* The hidden hyprland/window module sets `.empty` on the bar when the active
+   workspace has no windows — drop the translucent base then (module capsules
+   stay). Live toggle, no waybar reload. */
+window#waybar.empty {
+  background-color: transparent;
+}
+
+/* that hidden module renders as #window — it exists only for the class above,
+   so give it no size or chrome of its own */
+#window {
+  padding: 0;
+  margin: 0;
+  min-width: 0;
+  background-color: transparent;
+}
+
+/*
+margin (outer spacing) = top right bottom left
+padding (inner spacing)
+"10px" alone = 10px on every side (top/right/bottom/left)
+"margin: 10px 20px" = 10px top/bottom, 20px left/right
+*/
+
+#workspaces {
+    background: #11111B;
+    padding: 0px 0px;
+    border-radius: 16px;
+    border: solid 2px #11111B;
+    font-weight: normal;
+    font-style: normal;
+    padding: 0.1rem 0.1rem 0.1rem 0.1rem;
+    margin: 0.3rem 0rem 0.35rem 0.4rem;
+}
+
+#workspaces button {
+    color: #cdd6f4;
+    background-color: transparent;
+    border-radius: 16px;
+    min-width: 30px;
+    transition: all 0.2s ease-in-out;
+}
+
+
+#workspaces button.active {
+    color: #cdd6f4;
+    background-color: #cdd6f4;
+    border-radius: 18px;
+    min-width: 80px;
+    transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+    color: #334993;
+    background-color: #264dd0;
+    border-radius: 16px;
+    min-width: 40px;
+    background-size: 400% 400%;
+}
+
+
+#battery,
+#power-profiles-daemon,
+#backlight,
+#wireplumber,
+#clock,
+#tray {
+    color: #f4b8e4;
+}
+
+/* Эффект при наведении на модуль трея */
+#tray:hover {
+    background-color: #f4b8e4;
+    color: #121212;
+}
+
+/* Стилизация самих иконок внутри трея */
+#tray > .passive,
+#tray > .active,
+#tray > .needs-attention {
+    background-color: transparent;
+    padding: 0 2px;
+}
+
+#custom-uptime,
+#custom-wifi,
+#custom-sysinfo,
+#custom-swaync,
+#custom-window {
+
+  padding: 0.1rem 0.7rem;
+  margin: 0.15rem 0.2rem 1rem 0rem;
+  border-radius: 0.5rem;
+  /* background-color: #181825; */
+  background-color: #1e1e2e;
+}
+
+#clock {
+  padding: 0.15rem 0.7rem;
+  margin: 0.15rem 0.2rem 1rem 0.15rem;
+}
+
+/* old network → custom/wifi (nmcli + bluetoothctl), color preserved */
+#custom-wifi {
+  color: peru;
+}
+
+/* dim when disconnected */
+#custom-wifi.disconnected {
+  color: #6c7086;
+}
+
+#custom-uptime{
+  color: seashell;
+}
+
+/* stopwatch state — the box still shows uptime, but the color changes while active (NO blink) */
+#custom-uptime.running {
+  color: #a6e3a1;
+}
+
+#custom-uptime.paused {
+  color: #f9e2af;
+}
+
+/* battery + power profile — two independent, fully-rounded capsules;
+   chrome (padding/margin/radius/background) comes from the shared #module rule above */
+#battery {
+  color: #a6e3a1;
+}
+
+/* power profile (native power-profiles-daemon) */
+#power-profiles-daemon {
+  color: #cba6f7;
+}
+
+/* battery thresholds — NO blink, color only (from config states) */
+#battery.warning {
+  color: #f9e2af;
+}
+
+#battery.critical {
+  color: #f38ba8;
+}
+
+#backlight {
+  color: #f9e2af;
+}
+
+/* old cpu color was teal; inherited by volume after the cpu module was removed */
+#wireplumber {
+  color: #94e2d5;
+}
+
+/* old cpu + memory pair → custom/sysinfo (single icon).
+   Doubles as the session-reset button (on-click → focus.sh): a slow resting
+   glow plus hover/press states signal that the capsule is clickable. This is
+   the one deliberate animation on the bar. */
+@keyframes sysinfo-pulse {
+  0%   { text-shadow: 0 0 0 rgba(116, 199, 236, 0); }
+  50%  { text-shadow: 0 0 6px rgba(116, 199, 236, 0.75); }
+  100% { text-shadow: 0 0 0 rgba(116, 199, 236, 0); }
+}
+
+#custom-sysinfo {
+  color: #74c7ec;
+  transition: color 0.2s ease-in-out,
+              padding 0.2s ease-in-out,
+              background-color 0.2s ease-in-out;
+  animation: sysinfo-pulse 3s ease-in-out infinite;
+}
+
+#custom-sysinfo:hover {
+  color: #89dceb;
+  padding: 0.15rem 1.6rem;
+  background-color: #313244;
+  animation: none;
+}
+
+#custom-sysinfo:active {
+  color: #1e1e2e;
+  background-color: #74c7ec;
+}
+
+#custom-sysinfo.warning {
+  color: #f9e2af;
+}
+
+#custom-sysinfo.critical {
+  color: #f38ba8;
+}
+
+/* notification center counter (swaync) */
+#custom-swaync {
+  color: #cba6f7;
+}
+
+#clock {
+  color: #74c7ec;
+}
+
+#clock.simpleclock {
+  color: #89b4fa;
+}
+
+#custom-window {
+  color: #cdd6f4;
+}
+
+/* gap between the resolved app icon and the name */
+#custom-window image {
+  margin-right: 0.35rem;
+}
