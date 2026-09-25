@@ -60,7 +60,7 @@
             "orientation": "horizontal"
         },
         "network": {
-            "interface": "eno1",
+            "interface": "wlan0",
             "interval": 1,
             "format": " {bandwidthUpBits}  {bandwidthDownBits}",
             //"format": "{ifname}",
@@ -72,6 +72,7 @@
             "tooltip-format-ethernet": "{ifname} ",
             "tooltip-format-disconnected": "Disconnected",
             "max-length": 30,
+	    "on-click": "networkmanager_dmenu",
         },
         "hyprland/workspaces": {
             "format": "{name}",

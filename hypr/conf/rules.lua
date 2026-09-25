@@ -38,3 +38,21 @@ hl.window_rule({
     move  = "20 monitor_h-120",
     float = true,
 })
+
+
+--networkmanager
+
+-- Правила для окон Rofi (делаем плавающим, центрируем и убираем внешнюю рамку)
+hl.window_rule({
+    { "float", "class:(Rofi)" },
+    { "center", "class:(Rofi)" },
+    { "noborder", "class:(Rofi)" }
+})
+
+-- Включаем размытие (blur) фона за Rofi
+hl.layer_rule({
+    { "blur", "rofi" },
+    { "ignorealpha 0.5", "rofi" }
+})
+
+

@@ -36,6 +36,11 @@ hl.env("HYPRCURSOR_SIZE", "24")
 hl.env("GBM_BACKEND", "nvidia-drm")
 hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 hl.env("NVD_BACKEND", "direct")
+-- Исправление графического бэкенда для AmneziaVPN и Qt6 приложений(intel graphics)
+hl.env("QT_QUICK_BACKEND", "software")
+hl.env("QT_QPA_PLATFORM", "xcb")
+
+
 
 -----------------------
 ----- PERMISSIONS -----

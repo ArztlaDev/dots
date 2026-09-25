@@ -1,0 +1,67 @@
+* {
+    /* Цветовая палитра (можно заменить на свои цвета) */
+    bg:          #11111bB0; /* Полупрозрачный темный фон (с альфа-каналом B0) */
+    bg-selected: #89b4fa;   /* Цвет выделенного пункта (акцентный) */
+    fg:          #cdd6f4;   /* Цвет текста */
+    fg-selected: #11111b;   /* Цвет текста в выделенном пункте */
+    border-col:  #89b4fa;   /* Цвет рамки */
+    
+    background-color: transparent;
+    text-color:       @fg;
+    font:            "JetBrainsMono Nerd Font 11";
+}
+
+window {
+    background-color: @bg;
+    border:           2px;
+    border-color:     @border-col;
+    border-radius:    12px;
+    width:            450px;
+    padding:          15px;
+}
+
+mainbox {
+    children: [ inputbar, listview ];
+    spacing:  10px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    background-color: #1e1e2e;
+    border-radius:    6px;
+    padding:          8px;
+}
+
+prompt {
+    text-color: @bg-selected;
+    margin:     0px 10px 0px 5px;
+}
+
+entry {
+    placeholder:       "Поиск...";
+    placeholder-color: #585b70;
+}
+
+listview {
+    fixed-height: false;
+    dynamic:      true;
+    lines:        8;
+    spacing:      5px;
+}
+
+element {
+    padding:       8px;
+    border-radius: 6px;
+}
+
+element normal text, element alternate text {
+    text-color: @fg;
+}
+
+element selected {
+    background-color: @bg-selected;
+}
+
+element selected text {
+    text-color: @fg-selected;
+}
