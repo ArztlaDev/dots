@@ -116,7 +116,8 @@
         "custom/power": {
             "format" : "⏻",
             "tooltip": false,
-            "menu": "on-click",
+	    "on-click": "wlogout",
+          /*  "menu": "on-click",
             "menu-file": "~/.config/waybar/power_menu.xml",
             "menu-actions": {
                 "shutdown": "systemctl poweroff",
@@ -124,7 +125,8 @@
                 "suspend": "systemctl suspend",
                 "hibernate": "systemctl hibernate",
                 "logout": "command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"
-            }
+	  
+            } */
         },
         "custom/notification": {
             "tooltip": true,
